@@ -121,9 +121,13 @@ export const getMessagesLogInfoAtTime = async (
   );
   const totalSendMessage = nodesMessage.map((m) => m.sendMessages).flat();
   const totalReceiveMessage = nodesMessage.map((m) => m.receiveMessages).flat();
+  const totalReceiveMessageMap = totalReceiveMessage.reduce((total, c) => {
+    total[c.message] = c;
+    return total;
+  }, {});
 
   const analysisArray = totalSendMessage.map((s) => {
-    const receive = totalReceiveMessage.find((r) => s.message === r.message);
+    const receive = totalReceiveMessageMap[s.message];
     const delay = receive ? Number(receive.timestamp) - Number(s.timestamp) : 0;
     return {
       send: s,
