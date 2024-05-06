@@ -153,7 +153,7 @@ export class ChatApi {
         to: '',
         timestamp: '',
         message: '',
-        actionType: '',
+        actionType: 'receive',
         status: 'error',
         reason: error,
       };
