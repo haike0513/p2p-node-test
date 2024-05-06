@@ -7,6 +7,7 @@ import { getRandomInt } from './utils';
 // import { BASE_LOG_DIR } from './logger/P2PChatLogger';
 import { getNodesLogInfo } from './utils/nodes';
 import { cronMessagesLogInfo } from './utils/messages';
+import { getMessagesLogInfoAtTime } from './utils/logAnalysis';
 
 @Injectable()
 export class AppService {
@@ -65,5 +66,9 @@ export class AppService {
   // @Cron('* * * * * *')
   handleCronMessageLog() {
     cronMessagesLogInfo();
+  }
+
+  async handleAnalysisLogs(testCase: string, start: string, end: string) {
+    return await getMessagesLogInfoAtTime(testCase, start, end);
   }
 }

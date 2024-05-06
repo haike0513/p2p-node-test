@@ -56,7 +56,7 @@ export class ChatApi {
       // from: this.keyPair.publicKey,
       to: this.chatApiOptions.anotherAgent,
       timestamp: dayjs().valueOf().toString(),
-      message: `${id.valueOf().toString()}-Hello ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
+      message: `${id.valueOf().toString()}-${this.chatApiOptions.agent}-${this.chatApiOptions.anotherAgent}-Hello ${dayjs().format('YYYY-MM-DD HH:mm:ss')}`,
       // message: `HelloServer!Test`,
       actionType: 'send',
       status: 'success',
