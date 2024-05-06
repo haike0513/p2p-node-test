@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import { exists } from 'fs-extra';
 
 export const getSingleSliceMessage = async (dir: string) => {
-  console.log('getSingleSliceMessage', dir);
+  // console.log('getSingleSliceMessage', dir);
   const isExist = await exists(dir);
   if (!isExist) {
     return {
