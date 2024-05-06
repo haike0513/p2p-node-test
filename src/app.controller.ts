@@ -20,14 +20,21 @@ export class AppController {
     @Query('testCase') testCase: string,
     @Query('start') start: string,
     @Query('end') end: string,
+    @Query('showCase') showCase: boolean,
   ) {
     try {
       const result = await this.appService.handleAnalysisLogs(
         testCase,
-        dayjs(start).format(SPLIT_TIME_FORMAT),
-        dayjs(end).format(SPLIT_TIME_FORMAT),
+        dayjs.unix(Number(start)).format(SPLIT_TIME_FORMAT),
+        dayjs.unix(Number(end)).format(SPLIT_TIME_FORMAT),
       );
-      return result;
+      const r = {
+        totalSend: result.totalSend,
+        totalReceive: result.totalReceive,
+        avg: result.avgDelay,
+        case: showCase ? result.cases : [],
+      };
+      return r;
     } catch (error) {
       return {
         code: -1,
