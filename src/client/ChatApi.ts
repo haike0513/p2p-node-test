@@ -2,8 +2,16 @@ import Websocket from 'ws';
 import { Logger } from '@nestjs/common';
 import { ChatMessageLog, P2PChatLogger } from '../logger/P2PChatLogger';
 import dayjs from 'dayjs';
-import { ZAction, ZIdentity, ZMessage } from 'src/proto/ZMsg';
-import { hexToU8a, u8aToU8a } from '@polkadot/util';
+import {
+  Clock,
+  ClockInfo,
+  ZAction,
+  ZChat,
+  ZIdentity,
+  ZMessage,
+  ZType,
+} from 'src/proto/ZMsg';
+import { hexToU8a } from '@polkadot/util';
 import { Keyring } from '@polkadot/keyring';
 import { mnemonicGenerate } from '@polkadot/util-crypto';
 import { KeyringPair } from '@polkadot/keyring/types';
@@ -64,14 +72,28 @@ export class ChatApi {
     };
 
     try {
+      const clock = Clock.create({
+        values: {},
+      });
+      const clockInfo = ClockInfo.create({
+        clock,
+        count: '1',
+        createAt: new Date().getMilliseconds().toString(),
+      });
+      const chat = ZChat.create({
+        messageData: chatMessageLog.message, // (message),
+        clock: clockInfo,
+      });
+      const data = ZChat.encode(chat).finish();
       const message = ZMessage.create({
-        action: ZAction.Z_TYPE_READ,
+        version: 0,
+        action: ZAction.Z_TYPE_WRITE,
+        type: ZType.Z_TYPE_ZCHAT,
         identity: ZIdentity.U_TYPE_CLI,
-        // id: u8aToU8a(chatMessageLog.id),
         from: hexToU8a(this.chatApiOptions.agent),
         // from: this.keyPair.publicKey,
         to: hexToU8a(this.chatApiOptions.anotherAgent),
-        data: u8aToU8a(chatMessageLog.message),
+        data: data,
       });
       // const defaultU = [
       //   58, 14, 72, 101, 108, 108, 111, 44, 32, 83, 101, 114, 118, 101, 114, 33,
@@ -102,15 +124,17 @@ export class ChatApi {
       this.p2pChatLogger.logMessage(chatMessageLog);
     }
   }
-  onSocketMessage = (message: MessageEvent<string>) => {
+  onSocketMessage = (message: MessageEvent<Buffer>) => {
     // this.logger.error('onSocketMessage', message.data);
     try {
+      const messageArray = new Uint8Array(message.data);
+      const zChat = ZChat.decode(messageArray);
       const chatMessageLog: ChatMessageLog = {
         id: dayjs().unix().toString(),
         from: '',
         to: '',
         timestamp: dayjs().valueOf().toString(),
-        message: message.data,
+        message: zChat.messageData,
         actionType: 'receive',
         status: 'success',
         reason: '',

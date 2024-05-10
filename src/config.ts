@@ -7,17 +7,17 @@ export interface NodeConfig {
 export const nodesConfig: NodeConfig[] = [
   {
     name: 'vlc23333',
-    url: 'ws://31.220.78.83:23333/vlc23333',
-    // url: 'ws://127.0.0.1:23333/vlc23333',
+    // url: 'ws://31.220.78.83:23333/vlc23333',
+    url: 'ws://127.0.0.1:23333/vlc23333',
     agent: '406b4c9bb2117df0505a58c6c44a99c8817b7639d9c877bdbea5a8e4e0412740',
     anotherAgent:
-      '3724b4e85737f7a77b18737535cecd676db38e88514bf0387c2d8fa62905f8eb',
+      'f78e5a39e3d433986c4b8026d0baeb62b7eb845c29bb83a04b79d645ef7efbba',
   },
   {
-    name: 'vlc23335',
-    url: 'ws://31.220.78.83:23335/vlc23335',
-    // url: 'ws://127.0.0.1:23335/vlc23335',
-    agent: '3724b4e85737f7a77b18737535cecd676db38e88514bf0387c2d8fa62905f8eb',
+    name: 'vlc23334',
+    // url: 'ws://31.220.78.83:23335/vlc23335',
+    url: 'ws://127.0.0.1:23334/vlc23334',
+    agent: 'f78e5a39e3d433986c4b8026d0baeb62b7eb845c29bb83a04b79d645ef7efbba',
     anotherAgent:
       '406b4c9bb2117df0505a58c6c44a99c8817b7639d9c877bdbea5a8e4e0412740',
   },
