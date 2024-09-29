@@ -2,16 +2,27 @@ import axios from "axios";
 export interface PostJobOption {
   user: string;
 }
+
+function getRandomInt(min:number, max: number) {
+  // min = Math.ceil(min);
+  // max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export const randomOneOfArray = <T,>(all: T[]): T => {
+  let index = getRandomInt(0, all.length - 1);
+  return all[index];
+}
 const DISPATCHER_URL = 'http://18.136.124.172:3000';
 
 
 
 export const randomTag = () => {
-  return "";
+  return randomOneOfArray(["", "", ""]);
 };
 
 export const randomPrompt = () => {
-  return "What is AI?";
+  return randomOneOfArray(["What is AI?", "What is tree?"]);
 };
 
 
@@ -25,7 +36,7 @@ export const randomJobType = () => {
     type: "tee",
     user: "b77f1799de0148c07bc6ef630fb75ac267f31d147cd28797ad145afe72302tee",
 }
-return teeType;
+return randomOneOfArray([teeType, opmlType]);
 };
 
 export async function postJob(option?: PostJobOption) {
