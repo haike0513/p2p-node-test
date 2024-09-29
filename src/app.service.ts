@@ -22,7 +22,7 @@ export class AppService {
     const nodesInfo = await getNodesLogInfo();
     return nodesInfo;
   }
-  @Cron('*/20 * * * * *')
+  @Cron('0 * * * * *')
   async handleSubmitJob() {
     try {
       const rs = await postJob();
