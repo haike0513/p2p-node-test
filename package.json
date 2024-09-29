@@ -29,6 +29,7 @@
     "@polkadot/util-crypto": "^12.6.2",
     "@types/fs-extra": "^11.0.4",
     "@types/papaparse": "^5.3.14",
+    "axios": "^1.7.7",
     "dayjs": "^1.11.11",
     "fs-extra": "^11.2.0",
     "long": "^5.2.3",

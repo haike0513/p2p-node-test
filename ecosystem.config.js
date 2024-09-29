@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'p2p-node-test',
+      name: 'test-case',
       script: 'pnpm start',
     },
   ],
