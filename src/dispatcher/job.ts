@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 export interface PostJobOption {
   user: string;
 }
@@ -22,7 +23,11 @@ export const randomTag = () => {
 };
 
 export const randomPrompt = () => {
-  return randomOneOfArray(["What is AI?", "What is tree?"]);
+  const time = dayjs().format(`YYYY-MM-DD HH:mm:ss`);
+  return randomOneOfArray([
+    `What is the year of ${time}`,
+    `What is the month of ${time}`,
+  ]);
 };
 
 
