@@ -55,10 +55,10 @@ export const randomJobType = () => {
     type: 'tee',
     user: 'b77f1799de0148c07bc6ef630fb75ac267f31d147cd28797ad145afe72302tee',
     params: {
-      temperature: 1.0,
-      top_p: 0.5,
-      max_tokens: 1024,
-      proofPath: 'https://raw.githubusercontent.com/d5c5ceb0/t/main/proof.json',
+      // temperature: 1.0,
+      // top_p: 0.5,
+      // max_tokens: 1024,
+      proof_path: 'https://raw.githubusercontent.com/d5c5ceb0/t/main/proof.json',
     },
   };
   return randomOneOfArray([teeType, opmlType, zkMLType]);
