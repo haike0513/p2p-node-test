@@ -52,7 +52,7 @@ export const randomJobType = () => {
 
   const zkMLType = {
     model: '2l_relu_fc',
-    type: 'tee',
+    type: 'zkml',
     user: 'b77f1799de0148c07bc6ef630fb75ac267f31d147cd28797ad145afe72302tee',
     params: {
       // temperature: 1.0,
