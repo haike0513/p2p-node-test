@@ -77,12 +77,8 @@ export async function postJob(option?: PostJobOption) {
     job: {
       tag: jobType.type,
       prompt: prompt,
-      model: 'ss',
-      params: {
-        temperature: 1.0,
-        top_p: 0.5,
-        max_tokens: 1024,
-      },
+      model: jobType.model,
+      params: jobType.params,
     },
     verify: 'haike0513@gmail.com',
   };
