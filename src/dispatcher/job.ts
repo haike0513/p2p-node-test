@@ -14,7 +14,8 @@ export const randomOneOfArray = <T>(all: T[]): T => {
   const index = getRandomInt(0, all.length - 1);
   return all[index];
 };
-const DISPATCHER_URL = 'http://18.136.124.172:3000';
+// const DISPATCHER_URL = 'http://18.136.124.172:3000';
+const DISPATCHER_URL = 'https://mainnet.teeml.ai';
 
 export const randomTag = () => {
   return randomOneOfArray(['', '', '']);
@@ -58,10 +59,15 @@ export const randomJobType = () => {
       // temperature: 1.0,
       // top_p: 0.5,
       // max_tokens: 1024,
-      proof_path: 'https://raw.githubusercontent.com/d5c5ceb0/t/main/proof.json',
+      proof_path:
+        'https://raw.githubusercontent.com/d5c5ceb0/t/main/proof.json',
     },
   };
-  return randomOneOfArray([teeType, opmlType, zkMLType]);
+  return randomOneOfArray([
+    // teeType,
+    opmlType,
+    // zkMLType
+  ]);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

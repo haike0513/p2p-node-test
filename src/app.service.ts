@@ -22,22 +22,20 @@ export class AppService {
     const nodesInfo = await getNodesLogInfo();
     return nodesInfo;
   }
-  @Cron('0 * * * * *')
+  @Cron('*/30 * * * * *')
   async handleSubmitJob() {
     try {
       const rs = await postJob();
       let jobId = rs.data.result;
-      if(jobId) {
+      if (jobId) {
         this.logger.log(`submit a job: ${jobId}`);
-      }else{
+      } else {
         this.logger.error(`submit a job error with code: ${rs.data.code}`);
       }
       console.log(rs?.data);
     } catch (error) {
-      this.logger.error("submit a job failed", error);
-      
+      this.logger.error('submit a job failed', error);
     }
-
   }
 
   async handleAnalysisLogs(testCase: string, start: string, end: string) {
